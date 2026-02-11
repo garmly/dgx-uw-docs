@@ -2,7 +2,7 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name workstation.meb120.me.washington.edu 172.28.14.37;
+    server_name workstation.meb120.me.washington.edu <IP_ADDRESS>;
 
     root /var/www/workstation;
     index index.html;
