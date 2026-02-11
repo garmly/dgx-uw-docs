@@ -1,0 +1,201 @@
+/* ====== Theme ====== */
+:root{
+  --bg: #0f1117;
+  --bg-elev: #171a23;
+  --surface: #1d2130;
+  --text: #e7eaf3;
+  --text-muted: #b8c0d4;
+  --border: #2d344a;
+
+  /* UW-inspired colors */
+  --uw-purple: #4b2e83;       /* Spirit Purple */
+  --uw-purple-deep: #32006e;  /* Husky Purple */
+  --uw-gold: #b7a57a;         /* Husky Gold */
+  --uw-gold-web: #e8e3d3;     /* Web gold */
+}
+
+/* ====== Base ====== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, #262b3c 0%, transparent 60%),
+    radial-gradient(900px 500px at 95% 0%, #1d2233 0%, transparent 55%),
+    var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+/* ====== UW Header ====== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(90deg, var(--uw-purple-deep), var(--uw-purple));
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+
+.site-header .header-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0.9rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: clamp(1rem, 1.2vw + 0.8rem, 1.4rem);
+  letter-spacing: 0.02em;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* ====== Main container ====== */
+.container {
+  max-width: 980px;
+  margin: 2rem auto 3rem;
+  padding: 0 1rem;
+}
+
+.content-card {
+  background: linear-gradient(180deg, var(--bg-elev), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+  padding: 1.4rem 1.1rem;
+}
+
+/* ====== Typography ====== */
+h1, h2, h3 {
+  line-height: 1.25;
+  margin-top: 0;
+}
+
+.page-title {
+  margin-bottom: 1rem;
+  font-size: clamp(1.5rem, 1.6vw + 1rem, 2rem);
+}
+
+h2 {
+  margin-top: 1.7rem;
+  margin-bottom: 0.7rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border);
+  font-size: clamp(1.1rem, 0.9vw + 0.9rem, 1.4rem);
+}
+
+h3 {
+  margin-top: 1.2rem;
+  margin-bottom: 0.55rem;
+  color: var(--uw-gold-web);
+  font-size: clamp(1rem, 0.7vw + 0.85rem, 1.2rem);
+}
+
+p, li {
+  color: var(--text);
+}
+
+.muted {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ====== Links ====== */
+a {
+  color: #c8b6ff;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(200,182,255,0.55);
+}
+a:hover, a:focus {
+  color: #e1d6ff;
+  border-bottom-style: solid;
+}
+
+/* ====== List ====== */
+ul {
+  padding-left: 1.15rem;
+}
+li + li {
+  margin-top: 0.35rem;
+}
+
+/* ====== Table ====== */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #131722;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+th, td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.62rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:nth-child(even) td {
+  background: rgba(255,255,255,0.02);
+}
+
+/* ====== Code blocks ====== */
+pre, code {
+  font-family: "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+}
+
+pre {
+  background: #0b0f19;
+  border: 1px solid #2b3042;
+  border-radius: 10px;
+  padding: 0.8rem 0.9rem;
+  overflow-x: auto;
+  margin: 0.85rem 0 1.1rem;
+}
+
+code {
+  background: rgba(255,255,255,0.08);
+  padding: 0.1rem 0.32rem;
+  border-radius: 6px;
+}
+
+/* ====== Small callout badges ====== */
+.badge {
+  display: inline-block;
+  background: rgba(183,165,122,0.17);
+  color: #f2e8cd;
+  border: 1px solid rgba(183,165,122,0.45);
+  border-radius: 999px;
+  padding: 0.12rem 0.55rem;
+  font-size: 0.82rem;
+  margin-left: 0.35rem;
+}
+
+/* ====== Responsive ====== */
+@media (min-width: 720px) {
+  .content-card { padding: 1.8rem 1.7rem; }
+}

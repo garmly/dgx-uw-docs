@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DGX Spark Guide</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>AI Institute for Dynamic Systems</h1>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="content-card">
+      <h1 class="page-title">DGX Spark Workstation Guide</h1>
+
+      <h2>Purpose</h2>
+      <p>
+        The NVIDIA DGX Spark is a high-performance workstation designed for extensive AI and data science workloads.
+        It uses 128 GB of unified memory architecture which enables training and inferencing large machine learning models.
+        Two may be connected together to create a 256 GB system.
+      </p>
+
+      <h3>Specifications</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><td><strong>Architecture</strong></td><td>NVIDIA Grace Blackwell</td></tr>
+          <tr><td><strong>GPU</strong></td><td>Blackwell Architecture</td></tr>
+          <tr><td><strong>CPU</strong></td><td>20 core Arm, 10 Cortex-X925 + 10 Cortex-A725 Arm</td></tr>
+          <tr><td><strong>CUDA Cores</strong></td><td>Blackwell Generation</td></tr>
+          <tr><td><strong>Tensor Cores</strong></td><td>5th Generation</td></tr>
+          <tr><td><strong>RT Cores</strong></td><td>4th Generation</td></tr>
+          <tr><td><strong>Tensor Performance</strong></td><td>Up to 1 PFLOP FP4</td></tr>
+          <tr><td><strong>System Memory</strong></td><td>128 GB LPDDR5x, coherent unified system memory</td></tr>
+          <tr><td><strong>Memory Interface</strong></td><td>256-bit</td></tr>
+          <tr><td><strong>Memory Bandwidth</strong></td><td>273 GB/s</td></tr>
+          <tr><td><strong>Storage</strong></td><td>4 TB NVME.M2 with self-encryption</td></tr>
+          <tr><td><strong>USB</strong></td><td>4x USB TypeC</td></tr>
+          <tr><td><strong>Ethernet</strong></td><td>1x RJ-45 connector, 10 GbE</td></tr>
+          <tr><td><strong>NIC</strong></td><td>ConnectX-7 NIC @ 200 Gbps</td></tr>
+          <tr><td><strong>Wi-Fi</strong></td><td>WiFi 7</td></tr>
+          <tr><td><strong>Bluetooth</strong></td><td>BT 5.4</td></tr>
+          <tr><td><strong>Audio-output</strong></td><td>HDMI multichannel audio output</td></tr>
+          <tr><td><strong>Power Supply</strong></td><td>240 W</td></tr>
+          <tr><td><strong>GB10 TDP</strong></td><td>140 W</td></tr>
+          <tr><td><strong>Display Connectors</strong></td><td>1x HDMI 2.1a</td></tr>
+          <tr><td><strong>NVENC | NVDEC</strong></td><td>1x | 1x</td></tr>
+          <tr><td><strong>OS</strong></td><td>NVIDIA DGX™ OS</td></tr>
+          <tr><td><strong>System Dimensions</strong></td><td>150 mm L x 150 mm W x 50.5 mm H</td></tr>
+          <tr><td><strong>System Weight</strong></td><td>1.2 kg</td></tr>
+        </table>
+      </div>
+
+      <p>
+        We have two DGX Spark workstations available for use, along with two personal workstations with identical specifications.
+        The workstation hostnames are:
+      </p>
+
+      <ul>
+        <li><strong>michelangelo</strong><span class="badge">personal</span>: michelangelo.meb120.me.washington.edu — 172.28.14.37/24</li>
+        <li><strong>donatello</strong><span class="badge">personal</span>: donatello.meb120.me.washington.edu — 172.28.14.38/24</li>
+        <li><strong>raphael</strong>: raphael.meb120.me.washington.edu — 172.28.14.39/24</li>
+        <li><strong>leonardo</strong>: leonardo.meb120.me.washington.edu — 172.28.14.40/24</li>
+      </ul>
+
+      <p class="muted">
+        Personal workstations are prioritized for owner use; shared workstations are assigned first when possible.
+      </p>
+
+      <h2>Getting Started</h2>
+      <p>
+        Email me at <a href="mailto:garciaml@uw.edu">garciaml@uw.edu</a> to request access to this workstation.
+        I will need your SSH public key to enable login.
+      </p>
+
+      <p>Generate an SSH key pair:</p>
+      <pre><code>ssh-keygen -t rsa -b 4096 -C "UNetID@uw.edu"</code></pre>
+
+      <p>
+        Send your public key (from <code>~/.ssh/id_rsa.pub</code>) with your UNetID. I will reply with the assigned workstation.
+        Then log in using:
+      </p>
+      <pre><code>ssh [UNetID]@[workstation].meb120.me.washington.edu</code></pre>
+
+      <p>
+        If you are not on the UW network, you will need to connect via Husky OnNet VPN first: <a href="https://itconnect.uw.edu/connect/remote-access/vpn/husky-onnet-vpn/">https://itconnect.uw.edu/connect/remote-access/vpn/husky-onnet-vpn/</a>
+      </p>
+
+      <h2>JupyterLab</h2>
+      <p>
+        JupyterLab is installed on each DGX Spark workstation. After SSH login, check your assigned Jupyter port:
+      </p>
+      <pre><code>cat /opt/nvidia/dgx-dashboard-service/jupyterlab_ports.yaml</code></pre>
+
+      <p>
+        Find your UNetID and assigned port, then open an SSH tunnel:
+      </p>
+      <pre><code>ssh -L 11000:localhost:11000 -L [PORT]:localhost:[PORT] [UNetID]@[workstation].meb120.me.washington.edu</code></pre>
+
+      <p>
+        Open <code>http://localhost:11000</code> in your browser and click <em>Start</em>, then click
+        <em>Open in Browser</em> to launch the notebook.
+      </p>
+
+      <p class="muted">
+        To close your session: close the terminal running the tunnel or press <code>Ctrl + C</code>.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
