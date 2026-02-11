@@ -1,0 +1,16 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name workstation.meb120.me.washington.edu 172.28.14.37;
+
+    root /var/www/workstation;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    access_log /var/log/nginx/workstation.access.log;
+    error_log  /var/log/nginx/workstation.error.log;
+}
